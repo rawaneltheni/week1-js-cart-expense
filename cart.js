@@ -8,6 +8,7 @@ let cart = [
 
 console.table(cart);
 
+/*
 // using push method to add new item to cart
 
 cart.push({name: 'Salt', price: 1.0, quantity: 4});
@@ -30,7 +31,7 @@ console.table(cart);
 
 
 // Using template literals to log the total cost of items in the cart
-/*
+
 let cost = cart[0].price + cart[1].price + cart[2].price + cart[3].price;
 let totalItems = cart[0].quantity + cart[1].quantity + cart[2].quantity + cart[3].quantity;
 
@@ -51,7 +52,7 @@ console.log(`The total cost of items in the cart is $${cost} for ${totalItems} i
 // Day 2 - 5 Days of JavaScript (Operators & Conditionals)
 
 // task 1: add logic to calculate the total cost of items in the cart
-
+/*
 function calculateTotal(cart) {
     
     let total_price = 0;
@@ -102,3 +103,105 @@ function calculateTotal(cart) {
     }
 
 } console.log(calculateTotal(cart));
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+// Day 3 - 5 : Loops & Functions
+
+function addItemToCart(cart, name, price, quantity) {
+    cart.push({name: name, price: price, quantity: quantity});
+}
+
+function removeItem(cart, name) {
+    const index = cart.findIndex(i => i.name === name);
+    if (index !== -1) cart.splice(index, 1);
+}
+
+function doublePrices(cart) {
+    for (let i = 0; i < cart.length; i++) 
+        cart[i].price *= 2;
+}
+
+function getMostExpensiveItem(cart) {
+    let max = 0;
+    cart.forEach(element => { 
+        if(element.price > max) 
+            max = element.price;
+        });
+    return max;
+}
+
+function resetCart(cart) {
+    cart.length = 0;
+}
+
+const readlineSync = require('readline-sync');
+
+let choice = '';
+while (choice !== 'e') {
+
+    console.log("Press \n (e) : exit \n (a) : add \n (d) : delete \n (o) : double \n (x) : get the most expensive item \n (r) : reset: ");
+    choice = readlineSync.question("\t\nYour choice: ").toLowerCase();
+
+    if (choice === 'e') break;
+
+    // Task 1 : Add an item to the cart using a loop and function
+    else if (choice === 'a') {
+
+    let itemName = readlineSync.question("Item Name: ");
+    let itemPrice = readlineSync.question("Item Price: ");
+    let itemQuantity = readlineSync.question("Item Quantity: ");
+
+    addItemToCart(cart, itemName, parseFloat(itemPrice), parseInt(itemQuantity));
+
+    console.log("Item added to cart successfully! Here is the updated cart: \n ");
+    console.table(cart);
+
+    }
+
+    // Task 2 : Remove an item from the cart using a loop and function
+    else if (choice === 'd') {
+        let ItemNameToDelete = readlineSync.question("Enter the name of the item to delete: ");
+        removeItem(cart, ItemNameToDelete);
+        console.log("Item removed from cart successfully! Here is the updated cart: \n ");
+        console.table(cart);
+    }
+
+    // Task 3 : Write a function that doubles all prices in the cart using a loop and function
+    else if (choice === 'o') {
+        doublePrices(cart);
+        console.log("All prices in the cart have been doubled. Here is the updated cart: \n ");
+        console.table(cart);
+    }
+
+    // Task 4 : Create a getMostExpensiveItem() function
+    else if (choice === 'x') {
+        let mostExpensive = getMostExpensiveItem(cart);
+        console.log(`The most expensive item in the cart is priced at $${mostExpensive}`);
+    }
+
+    // Task 5 : Write a function to reset the cart completely
+    else if (choice === 'r') {
+        resetCart(cart);
+        console.log("Cart has been reset successfully! Here is the updated cart: \n ");
+        console.table(cart);
+    }
+
+    else {
+        console.error("Invalid choice. Please try again.");
+    }
+
+}
+
+
+
