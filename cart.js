@@ -1,5 +1,5 @@
 // Day 1 - 5 Days of JavaScript (Variables, Data Types & Arrays)
-
+/*
 let cart = [
     {name: 'Chocolate', price: 3.0, quantity: 3},
     {name: 'Tea', price: 2.0, quantity: 2},
@@ -7,7 +7,7 @@ let cart = [
 ];
 
 console.table(cart);
-
+*/
 /*
 // using push method to add new item to cart
 
@@ -117,7 +117,7 @@ function calculateTotal(cart) {
 
 
 // Day 3 - 5 : Loops & Functions
-
+/*
 function addItemToCart(cart, name, price, quantity) {
     cart.push({name: name, price: price, quantity: quantity});
 }
@@ -202,6 +202,101 @@ while (choice !== 'e') {
     }
 
 }
+*/
 
 
 
+
+
+
+
+
+
+
+
+
+// Day 4 - 5 : Objects & Simple DOM Output
+
+// - Convert the shopping cart into an object with methods ( addItem , removeItem , getTotal ). 
+
+const cart = {
+
+    items : [ 
+        {name: 'Chocolate', price: 3.0, quantity: 3} , 
+        {name: 'Tea', price: 2.0, quantity: 2}, 
+        {name: 'Coffee', price: 1.5, quantity: 1}, 
+    ],
+
+    addItem(name, price, quantity) {
+        this.items.push({name, price, quantity});
+        renderCart();
+        renderCart(this);
+    },
+
+    removeItem(name) {
+        let index = this.items.findIndex(i => i.name === name);
+        if (index !== -1) this.items.splice(index, 1);
+        renderCart();
+        renderCart(this);
+    },
+
+    getTotal() {
+        let total_price = 0;
+        for (const item of this.items) {
+            total_price += item.price * item.quantity;
+        }
+        return Number(total_price.toFixed(2));
+    },
+
+    clearCart() {
+        this.items.length = 0;
+        renderCart();
+        renderCart(this);
+    },
+
+    checkOut() {
+        if(this.items.length !== 0)
+            alert("Checkout successful! Thank you for your purchase.");
+        else
+            alert("Your cart is empty!");
+        this.clearCart();
+    },
+
+
+};
+
+// Print the cart as a table in HTML
+function renderCart(cart = window.cart) {
+    const table = document.getElementById('cartTable');
+    const totalDisplay = document.getElementById('displayTotal');
+
+    if (!table || !totalDisplay) return;
+
+    let html = `
+        <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Action</th>
+        </tr>
+        `;
+
+        cart.items.forEach(item => {
+        html += `
+            <tr>
+              <td>${item.name}</td>
+              <td>$${item.price.toFixed(2)}</td>
+              <td>${item.quantity}</td>
+              <td>$${(item.price * item.quantity).toFixed(2)}</td>
+              <td><button onclick="cart.removeItem('${item.name}')">Remove</button></td>
+            </tr>
+          `;
+        });
+
+        table.innerHTML = html;
+        totalDisplay.innerText = `Total: $${cart.getTotal().toFixed ? cart.getTotal().toFixed(2) : cart.getTotal()}`;
+    }
+
+window.cart = cart;
+renderCart(cart);
