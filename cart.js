@@ -300,3 +300,20 @@ function renderCart(cart = window.cart) {
 
 window.cart = cart;
 renderCart(cart);
+
+
+
+
+
+
+
+
+
+
+// Day 5 - 5 : Expense Tracker Dashboard (Integration)
+
+// Task 1 : Create expenseTracker.js with a list of expenses { category, amount } 
+// Task 2 : Add functions: addExpense(), getTotalExpenses(), getCategorySummary()
+// Task A : Filter expenses by category 
+// Task B : Sort expenses by amount 
+// Task C : Combine your Expense Tracker with Shopping Cart totals for a weekly spending summary.

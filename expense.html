@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Dashboard</title>
+</head>
+<body>
+
+    <h1>Expense Tracker Dashboard</h1>
+
+    <label for="filterSelect">Filter by:</label>
+    <select name="filter" id="filterSelect" aria-label="Filter by" onchange="handleFilterChange()">
+        <option value="general">All</option>
+        <option value="amount">Amount</option>
+        <option value="cat01">Category 01: Drinks</option>
+        <option value="cat02">Category 02: Fruit & Vegetables</option>
+        <option value="cat03">Category 03: Treats</option>
+        <option value="cat04">Category 04: Red meat</option>
+
+    </select>
+
+    <table id="expenseTable" border="1"></table>
+
+    <input type="text" id="categoryInput" placeholder="Add category*" required>
+    <input type="text" id="amountInput" placeholder="Add amount*" required>
+    <button id="submitBtn" onclick="addExpense()" >Submit</button>
+
+    <br><br>
+
+    <button id="showSummary" onclick="getCategorySummary()">Show summary</button>
+    <h3 id="totalExpenses">Total Expenses: 0</h3>
+
+
+    <a href="index.html"><button>Back to the cart</button></a>
+
+    <script src="expenseTracker.js"></script>
+</body>
+</html>
